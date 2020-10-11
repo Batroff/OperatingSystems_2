@@ -26,7 +26,7 @@ class MyThread extends Thread {
         String password = String.valueOf(_start).repeat(5);
         char[] passwordArr = password.toCharArray();
 
-        for (char i = _start; i < _end; i++) {
+        for (char i = _start; i <= _end; i++) {
             passwordArr[0] = i;
 
             for (char j = START; j <= END; j++) {
@@ -42,8 +42,7 @@ class MyThread extends Thread {
                             passwordArr[4] = n;
 
                             String passwordHash = convertToHash(new String(passwordArr));
-//                            if (passwordHash.equals(_hashes[0]) | passwordHash.equals(_hashes[1]) | passwordHash.equals(_hashes[2])) {
-                            if (Arrays.stream(_hashes).anyMatch(hash -> hash.equals(passwordHash))) {
+                            if (Arrays.asList(_hashes).contains(passwordHash)) {
                                 System.out.println(new String(passwordArr) + " - " + passwordHash);
                             }
                         }
@@ -76,9 +75,9 @@ public class Main {
         long start = System.currentTimeMillis();
 
         MyThread myThread1 = new MyThread('a', 'g');
-        MyThread myThread2 = new MyThread('g', 'n');
-        MyThread myThread3 = new MyThread('n', 't');
-        MyThread myThread4 = new MyThread('t', (char) ('z' + 1));
+        MyThread myThread2 = new MyThread('h', 'n');
+        MyThread myThread3 = new MyThread('o', 't');
+        MyThread myThread4 = new MyThread('u', 'z');
 
         myThread1.start();
         myThread2.start();
